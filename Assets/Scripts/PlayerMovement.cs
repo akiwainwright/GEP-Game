@@ -16,21 +16,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
+        Vector3 movementDirectionVec = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        movementDirectionVec.Normalize();
+
+        //m_RB.MovePosition(transform.position + (movementDirectionVec * Time.deltaTime * moveSpeed));
+
+        m_RB.velocity = movementDirectionVec * moveSpeed;
+
+        if(movementDirectionVec != Vector3.zero)
         {
-            m_RB.AddForce(transform.forward * moveSpeed, ForceMode.Force);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            m_RB.AddForce(transform.forward * -moveSpeed, ForceMode.Force);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            m_RB.AddForce(transform.right * -moveSpeed, ForceMode.Force);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            m_RB.AddForce(transform.right * moveSpeed, ForceMode.Force);
+            transform.forward = movementDirectionVec;
         }
     }
 }
