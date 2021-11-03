@@ -26,9 +26,5 @@ public class TitleInteractions : MonoBehaviour
                 m_MainScreenSelections.SetActive(true);
             }
         }
-        else
-        {
-            Debug.Log("Pause");
-        }
     }
 }
