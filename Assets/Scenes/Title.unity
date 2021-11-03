@@ -1087,7 +1087,6 @@ GameObject:
   - component: {fileID: 708500820}
   - component: {fileID: 708500822}
   - component: {fileID: 708500821}
-  - component: {fileID: 708500824}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -1158,20 +1157,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 708500819}
   m_CullTransparentMesh: 1
---- !u!114 &708500824
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 708500819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 811b631c36514d94b86451338e4eac02, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_InitialTitlePrompt: {fileID: 1141817270}
-  m_MainScreenSelections: {fileID: 143667535}
 --- !u!1 &1141817270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,6 +1199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1211356312}
   - component: {fileID: 1211356311}
+  - component: {fileID: 1211356313}
   m_Layer: 5
   m_Name: ScreenControl
   m_TagString: Untagged
@@ -1254,6 +1240,20 @@ RectTransform:
   m_AnchoredPosition: {x: 1187.366, y: 486.21368}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1211356313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1211356310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 811b631c36514d94b86451338e4eac02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InitialTitlePrompt: {fileID: 1141817270}
+  m_MainScreenSelections: {fileID: 143667535}
 --- !u!1 &1317613381
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,17 +8,23 @@ public class ScreenManager : MonoBehaviour
     public GameObject titleScreen;
     public GameObject configScreen;
 
+    #region SceneLoading
     public void LoadScene(string scene)
     {
         SceneManager.LoadScene(scene);
     }
+    #endregion
 
+    #region QuitGame
     public void Quit()
     {
         Application.Quit();
         UnityEditor.EditorApplication.isPlaying = false;
     }
+    #endregion
 
+    //Methods to switch between main and config screen
+    #region ConfigScreen
     public void SettingsScreen()
     {
         titleScreen.SetActive(false);
@@ -30,4 +36,6 @@ public class ScreenManager : MonoBehaviour
         titleScreen.SetActive(true);
         configScreen.SetActive(false);
     }
+    #endregion
+
 }
