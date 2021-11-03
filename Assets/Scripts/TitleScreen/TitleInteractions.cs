@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class TitleInteractions : MonoBehaviour
@@ -17,13 +18,17 @@ public class TitleInteractions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(m_InitialTitlePrompt.activeSelf)
+        if(m_InitialTitlePrompt.activeInHierarchy)
         {
             if(Input.anyKeyDown)
             {
                 m_InitialTitlePrompt.SetActive(false);
                 m_MainScreenSelections.SetActive(true);
             }
+        }
+        else
+        {
+            Debug.Log("Pause");
         }
     }
 }
