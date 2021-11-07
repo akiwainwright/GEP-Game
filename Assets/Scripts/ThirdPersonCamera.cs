@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class ThirdPersonCamera : MonoBehaviour
 {
-    public Transform cameraTarget;
+    public GameObject target;
     public Vector3 cameraOffset;
 
     public float cameraSensitivity = 3f;
-    public float smoothTime;
+    
+    [Range(0, 1)]public float smooth = 0.1f;
+
+    private float m_Smoother;
+    
 
 
-    private Vector3 m_velocity = Vector3.one;
+    private Vector3 m_velocity = Vector3.zero;
 
     private float m_rotationX;
     private float m_rotationY;
@@ -19,18 +23,21 @@ public class ThirdPersonCamera : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        
+
+        //using exponential smoothing to prevent jitter
+        m_Smoother = 1f - Mathf.Pow(smooth, Time.deltaTime);
+
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        Vector3 destination = target.transform.position + cameraOffset;
+        //gameObject.transform.position = destination;
 
-        //Vector3 directionToTarget = transform.position - cameraTarget.transform.position;
-
-        Vector3 cameraDestination = cameraTarget.position + cameraOffset;
-
-        transform.position = Vector3.SmoothDamp(transform.position, cameraDestination, ref m_velocity, smoothTime);
-        transform.LookAt(cameraTarget);       
+        
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, destination, m_Smoother);
+        
+        
     }
 }
