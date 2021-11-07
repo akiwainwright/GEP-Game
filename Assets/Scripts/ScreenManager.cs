@@ -19,7 +19,7 @@ public class ScreenManager : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
     }
     #endregion
 

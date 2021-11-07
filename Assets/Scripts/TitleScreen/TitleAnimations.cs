@@ -27,13 +27,18 @@ public class TitleAnimations : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-
+    { 
         #region StopBlinkingLoop
         if (!m_AnyButtonPrompt.activeInHierarchy)
         {
             m_AnyButtonFade.Pause();
         }
+        if(m_AnyButtonPrompt.activeInHierarchy && !m_AnyButtonFade.IsPlaying())
+        {
+            m_AnyButtonFade.Restart();
+        }
+
+        
         #endregion
     }
 

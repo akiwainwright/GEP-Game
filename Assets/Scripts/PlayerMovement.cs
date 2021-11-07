@@ -31,8 +31,6 @@ public class PlayerMovement : MonoBehaviour
             Quaternion facingRotation = Quaternion.LookRotation(bothMovement, Vector3.up);
             m_RB.velocity = bothMovement * moveSpeed;
 
-            m_RB.AddForce(bothMovement, ForceMode.Force);
-
             transform.rotation = Quaternion.Slerp(transform.rotation, facingRotation, turnSpeed);
         }
         #endregion
@@ -49,8 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
             m_RB.velocity = verticalMovement * moveSpeed;
 
-            m_RB.AddForce(verticalMovement, ForceMode.Force);
-
             transform.rotation = Quaternion.Slerp(transform.rotation, facingRotation, turnSpeed);
         }
         #endregion
@@ -66,8 +62,6 @@ public class PlayerMovement : MonoBehaviour
             m_RB.velocity = horizontalMovement * moveSpeed;
 
             m_RB.velocity = horizontalMovement * moveSpeed;
-
-            m_RB.AddForce(horizontalMovement, ForceMode.Force);
 
             transform.rotation = Quaternion.Slerp(transform.rotation, facingRotation, turnSpeed);
         }
