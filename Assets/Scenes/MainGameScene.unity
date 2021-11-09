@@ -481,8 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19603c54324f0064d82f837294fd3c22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  camera: {fileID: 0}
+  playerCamera: {fileID: 1866068257}
+  moveSpeed: 250
   turnSpeed: 0.25
 --- !u!54 &856359777
 Rigidbody:
@@ -795,7 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1850958037}
-  cameraOffset: {x: 0, y: 1, z: -4}
+  distanceFromPlayer: 0
   cameraSensitivity: 3
   smooth: 0.4
 --- !u!114 &1866068254
