@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
+    public GameObject camera;
     [Range(0,1)]public float turnSpeed = 0.5f;
     
     private Rigidbody m_RB;
@@ -27,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 bothMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             bothMovement.Normalize();
-
             Quaternion facingRotation = Quaternion.LookRotation(bothMovement, Vector3.up);
             m_RB.velocity = bothMovement * moveSpeed;
 
@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
         //If player is moving in a horizontal direction i.e left or right
         if (Input.GetAxis("Vertical") == 0 && Input.GetAxis("Horizontal") != 0)
         {
+            
             Vector3 horizontalMovement = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
             horizontalMovement.Normalize();
 
@@ -64,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
             m_RB.velocity = horizontalMovement * moveSpeed;
 
             transform.rotation = Quaternion.Slerp(transform.rotation, facingRotation, turnSpeed);
+
         }
         #endregion
 
