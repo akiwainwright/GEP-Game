@@ -5,31 +5,37 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public Transform playerCamera;
-    public float moveSpeed = 5f;
-    [Range(0,1)]public float turnSpeed = 0.5f;
-    
+
     private Rigidbody m_RB;
-    // Start is called before the first frame update
-    void Start()
+
+    private Vector3 moveDir;
+
+    public float speed = 5f;
+
+    private void Start()
     {
         m_RB = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            //Moving based on camera dimensions
-            Vector3 horizontalMovement = playerCamera.right * Input.GetAxis("Horizontal");
-            Vector3 verticalMovement = Vector3.ProjectOnPlane(playerCamera.forward, Vector3.up) * Input.GetAxis("Vertical");
+            Vector3 horizontalDir = playerCamera.right * Input.GetAxis("Horizontal");
 
-            Vector3 totalMovement = horizontalMovement + verticalMovement;
-            totalMovement.Normalize();
+            Vector3 verticalDir = Vector3.ProjectOnPlane(playerCamera.forward, Vector3.up) * Input.GetAxis("Vertical");
 
-            m_RB.velocity = totalMovement * moveSpeed * Time.fixedDeltaTime;
+            moveDir = (horizontalDir + verticalDir).normalized;
 
-            m_RB.transform.forward = totalMovement;
+            m_RB.velocity = moveDir * speed * Time.deltaTime;
+            
+        }
+
+        if (moveDir != Vector3.zero)
+        {
+            m_RB.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
     }
+
+
 }
