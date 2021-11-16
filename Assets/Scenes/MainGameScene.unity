@@ -795,7 +795,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CameraFocusPoint: {fileID: 1850958038}
   keepDist: 6
-  smooth: 120
+  smooth: 80
 --- !u!114 &1866068254
 MonoBehaviour:
   m_ObjectHideFlags: 0
