@@ -69,11 +69,11 @@ public class ThirdPersonCamera : MonoBehaviour
 
             Vector3 nextPos = m_Target.position + (nextVec.normalized * Mathf.Sqrt((keepDistanceAbove * keepDistanceAbove) + (keepDistBehind * keepDistBehind)));
 
-            RaycastHit hit;
+            RaycastHit rHit;
 
-            if (Physics.Linecast(m_Target.position, nextPos, out hit))
+            if (Physics.Linecast(m_Target.position, nextPos, out rHit))
             {
-                float distance = (hit.point - m_Target.position).magnitude * 0.75f;
+                float distance = (rHit.point - m_Target.position).magnitude * 0.75f;
                 nextPos = m_Target.position + (nextVec.normalized * distance);
             }
 
@@ -83,32 +83,30 @@ public class ThirdPersonCamera : MonoBehaviour
         #endregion
 
         #region Auto Cam
-        else
+        
+        transform.rotation = Quaternion.LookRotation((m_Target.position - transform.position).normalized);
+
+        //Camera doesn't move on Y axis so working on y plane to prevent changing the Y position
+        Vector3 m_CamPosYPlane = Vector3.ProjectOnPlane(transform.position, Vector3.up);
+        Vector3 m_FocusPointYPlane = Vector3.ProjectOnPlane(m_Target.position, Vector3.up);
+
+        //Calculating the next position for the camera on the Y plane using player to camera direction and desired keep distance
+        Vector3 yPlaneNewCamPos = m_FocusPointYPlane + ((m_CamPosYPlane - m_FocusPointYPlane).normalized * keepDistBehind);
+
+        //Getting new position for camera by changing y value to cameras original y value
+        Vector3 newCamPos = new Vector3(yPlaneNewCamPos.x, transform.position.y, yPlaneNewCamPos.z);
+
+        RaycastHit hit;
+
+        if (Physics.Linecast(m_Target.position, transform.position, out hit))
         {
-            transform.rotation = Quaternion.LookRotation((m_Target.position - transform.position).normalized);
-
-            //Camera doesn't move on Y axis so working on y plane to prevent changing the Y position
-            Vector3 m_CamPosYPlane = Vector3.ProjectOnPlane(transform.position, Vector3.up);
-            Vector3 m_FocusPointYPlane = Vector3.ProjectOnPlane(m_Target.position, Vector3.up);
-
-            //Calculating the next position for the camera on the Y plane using player to camera direction and desired keep distance
-            Vector3 yPlaneNewCamPos = m_FocusPointYPlane + ((m_CamPosYPlane - m_FocusPointYPlane).normalized * keepDistBehind);
-
-            //Getting new position for camera by changing y value to cameras original y value
-            Vector3 newCamPos = new Vector3(yPlaneNewCamPos.x, transform.position.y, yPlaneNewCamPos.z);
-
-            RaycastHit hit;
-
-            if (Physics.Linecast(m_Target.position, transform.position, out hit))
-            {
-                Vector3 vecToHit = hit.point - m_Target.position;
-                float distance = vecToHit.magnitude * 0.75f;
-                newCamPos = m_Target.position + (vecToHit.normalized) * distance;
-            }
-
-            transform.position = Vector3.SmoothDamp(transform.position, newCamPos, ref m_Velocity, smooth * Time.deltaTime);
-
+            Vector3 vecToHit = hit.point - m_Target.position;
+            float distance = vecToHit.magnitude * 0.75f;
+            newCamPos = m_Target.position + (vecToHit.normalized) * distance;
         }
+
+        transform.position = Vector3.SmoothDamp(transform.position, newCamPos, ref m_Velocity, smooth * Time.deltaTime);
+
         #endregion
     }
 
