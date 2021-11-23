@@ -5489,8 +5489,6 @@ MonoBehaviour:
   screenConfig: {fileID: 341842231}
   cameraConfig: {fileID: 2089631160}
   volumeConfig: {fileID: 206123468}
-  windowType: {fileID: 826750745}
-  resolutionOptions: {fileID: 358889425}
 --- !u!1 &1708313671
 GameObject:
   m_ObjectHideFlags: 0

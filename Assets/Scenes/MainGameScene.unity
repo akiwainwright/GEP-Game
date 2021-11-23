@@ -793,12 +793,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad80a1fc1301f0d48a26d4c75c084a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CameraFocusPoint: {fileID: 1850958038}
-  cameraOffset: {x: 0, y: 0, z: 0}
+  m_Target: {fileID: 1850958038}
   keepDistBehind: 6
   keepDistanceAbove: 2.5
   smooth: 80
-  camSensitivity: 50
+  camSensitivity: 400
 --- !u!114 &1866068254
 MonoBehaviour:
   m_ObjectHideFlags: 0
