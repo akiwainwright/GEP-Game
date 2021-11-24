@@ -63,9 +63,13 @@ public class ThirdPersonCamera : MonoBehaviour
                 angle -= 360;
             }
 
+            float angleToCorrectAxis = ( (Vector3.Dot(m_Target.right, Vector3.right)) / (m_Target.right.magnitude * Vector3.right.magnitude) );
+
+            Vector3 playerHorizontalAxis = Quaternion.AngleAxis(-angleToCorrectAxis, m_Target.up) * m_Target.right;
+
             Vector3 fromTarget = transform.position - m_Target.position;
 
-            Vector3 nextVec = Quaternion.AngleAxis(angle, m_Target.right) * fromTarget;
+            Vector3 nextVec = Quaternion.AngleAxis(angle, playerHorizontalAxis) * fromTarget;
 
             Vector3 nextPos = m_Target.position + (nextVec.normalized * Mathf.Sqrt((keepDistanceAbove * keepDistanceAbove) + (keepDistBehind * keepDistBehind)));
 
