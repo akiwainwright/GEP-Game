@@ -79,10 +79,14 @@ public class ThirdPersonCamera : MonoBehaviour
             {
                 float distance = (rHit.point - m_Target.position).magnitude * 0.75f;
                 nextPos = m_Target.position + (nextVec.normalized * distance);
-            }
 
-            transform.position = Vector3.MoveTowards(transform.position, nextPos, angle * camSensitivity * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation((m_Target.position - transform.position).normalized);
+                transform.position = nextPos;
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, nextPos, angle * camSensitivity * Time.deltaTime);
+                transform.rotation = Quaternion.LookRotation((m_Target.position - transform.position).normalized);
+            }
         }
         #endregion
 

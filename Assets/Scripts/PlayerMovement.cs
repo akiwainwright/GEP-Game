@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerCamera;
 
     private Rigidbody m_RB;
+    private Animator m_Animator;
 
     private Vector3 moveDir;
 
@@ -15,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         m_RB = GetComponent<Rigidbody>();
+        m_Animator = GetComponent<Animator>();
     }
 
     private void FixedUpdate()
@@ -28,7 +30,11 @@ public class PlayerMovement : MonoBehaviour
             moveDir = (horizontalDir + verticalDir).normalized;
 
             m_RB.velocity = moveDir * speed * Time.deltaTime;
-            
+            m_Animator.SetBool("Moving", true);
+        }
+        else
+        {
+            m_Animator.SetBool("Moving", false);
         }
 
         if (moveDir != Vector3.zero)
