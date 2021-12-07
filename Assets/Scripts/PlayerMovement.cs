@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public Transform playerCamera;
+    [SerializeField] private Transform m_Camera;
 
     private Rigidbody m_RB;
     private Animator m_Animator;
@@ -23,9 +23,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            Vector3 horizontalDir = playerCamera.right * Input.GetAxis("Horizontal");
+            Vector3 horizontalDir = m_Camera.right * Input.GetAxis("Horizontal");
 
-            Vector3 verticalDir = Vector3.ProjectOnPlane(playerCamera.forward, Vector3.up) * Input.GetAxis("Vertical");
+            Vector3 verticalDir = Vector3.ProjectOnPlane(m_Camera.forward, Vector3.up) * Input.GetAxis("Vertical");
 
             moveDir = (horizontalDir + verticalDir).normalized;
 
