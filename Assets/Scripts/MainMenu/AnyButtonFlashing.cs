@@ -6,9 +6,10 @@ using DG.Tweening;
 
 public class AnyButtonFlashing : MonoBehaviour
 {
-    [SerializeField] private GameObject m_Panel;
+    [SerializeField] private GameObject m_PressAnyButton;
+    [SerializeField] private GameObject m_MainScreenOptions;
 
-    private Sequence m_FadeSequence = DOTween.Sequence();
+    private Sequence m_FadeSequence;
 
     private CanvasGroup m_Background;
 
@@ -18,11 +19,20 @@ public class AnyButtonFlashing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_Background = m_Panel.GetComponent<CanvasGroup>();
+        m_PressAnyButton.SetActive(true);
+        m_MainScreenOptions.SetActive(false);
+
+        m_Background = m_PressAnyButton.GetComponent<CanvasGroup>();
 
         //Setting up fade animation
-        m_FadeSequence.Append(m_Background.DOFade(0, m_FadeSpeed));
-        m_FadeSequence.Append(m_Background.DOFade(1, m_FadeSpeed));
+        m_FadeSequence = DOTween.Sequence();
+
+        Tween FadeOut = m_Background.DOFade(0, m_FadeSpeed);
+        Tween FadeIn = m_Background.DOFade(1, m_FadeSpeed);
+
+        m_FadeSequence.Append(FadeOut);
+        m_FadeSequence.Append(FadeIn);
+        m_FadeSequence.SetLoops(-1);
 
         //Setting animation to loop infinitely
         m_FadeSequence.SetLoops(-1);
@@ -33,14 +43,18 @@ public class AnyButtonFlashing : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (m_Panel.transform.parent.gameObject.activeInHierarchy && !m_FadeSequence.IsPlaying())
-        {
-            m_FadeSequence.Restart();
-        }
-        else
+     
+        if(Input.anyKey)
         {
             m_FadeSequence.Pause();
+
+            m_Background.transform.parent.gameObject.SetActive(false);
+            m_MainScreenOptions.SetActive(true);
+        }
+        
+        if(m_Background.transform.parent.gameObject.activeInHierarchy && !m_FadeSequence.IsPlaying())
+        {
+            m_FadeSequence.Restart();
         }
     }
 
