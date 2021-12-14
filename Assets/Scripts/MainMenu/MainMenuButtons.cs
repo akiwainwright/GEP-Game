@@ -7,17 +7,18 @@ public class MainMenuButtons : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(2);
     }
     
     public void LoadConfig()
     {
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        SceneManager.LoadScene(1, LoadSceneMode.Additive);
     }
 
     public void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
+        QuitGame();
     }
 
 

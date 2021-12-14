@@ -7,6 +7,6 @@ public class ConfigButtons : MonoBehaviour
 {
     public void Back()
     {
-        SceneManager.UnloadSceneAsync(2);
+        SceneManager.UnloadSceneAsync(1);
     }
 }
