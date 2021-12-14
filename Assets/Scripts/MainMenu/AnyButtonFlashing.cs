@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 using DG.Tweening;
+using UnityEngine.Audio;
 
 public class AnyButtonFlashing : MonoBehaviour
 {
     [SerializeField] private GameObject m_PressAnyButton;
     [SerializeField] private GameObject m_MainScreenOptions;
+
+    [SerializeField] private AudioSource m_ClickSFX;
 
     private Sequence m_FadeSequence;
 
@@ -15,6 +18,8 @@ public class AnyButtonFlashing : MonoBehaviour
 
     [Header("Fade Speed")]
     [SerializeField] private float m_FadeSpeed = 1.5f;
+
+    private bool m_CanPlaySFX;
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +43,8 @@ public class AnyButtonFlashing : MonoBehaviour
         m_FadeSequence.SetLoops(-1);
 
         m_FadeSequence.Play();
+
+        m_CanPlaySFX = true;
     }
 
     // Update is called once per frame
@@ -46,6 +53,12 @@ public class AnyButtonFlashing : MonoBehaviour
      
         if(Input.anyKey)
         {
+            if (m_CanPlaySFX)
+            {
+                m_ClickSFX.Play();
+                m_CanPlaySFX = false;
+            }
+            
             m_FadeSequence.Pause();
 
             m_Background.transform.parent.gameObject.SetActive(false);

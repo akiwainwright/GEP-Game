@@ -42,6 +42,4 @@ public class PlayerMovement : MonoBehaviour
             m_RB.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
         }
     }
-
-
 }
