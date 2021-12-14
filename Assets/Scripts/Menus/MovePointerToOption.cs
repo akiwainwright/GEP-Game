@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class MovePointerToOption : MonoBehaviour
+public class MovePointerToOption : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject m_MenuOptions;
 
@@ -14,6 +15,16 @@ public class MovePointerToOption : MonoBehaviour
     private Vector4[] m_ButtonCollider;
 
     private Vector2[,] m_PossiblePositions;
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Entered");
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Debug.Log("Pointer Exited");
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,10 +53,10 @@ public class MovePointerToOption : MonoBehaviour
         //creating a box for each button to detect if mouse is over them
         for (int i = 0; i < m_ButtonCollider.Length; ++i)
         {
-            float right = m_Options[i].transform.position.x + m_Options[i].rect.width / 2;
-            float left = m_Options[i].transform.position.x - m_Options[i].rect.width / 2;
-            float top = m_Options[i].transform.position.y + m_Options[i].rect.height / 2;
-            float bottom = m_Options[i].transform.position.y - m_Options[i].rect.height / 2;
+            float right = m_Options[i].transform.position.x + m_Options[i].rect.width / 2f;
+            float left = m_Options[i].transform.position.x - m_Options[i].rect.width / 2f;
+            float top = m_Options[i].transform.position.y + m_Options[i].rect.height / 2f;
+            float bottom = m_Options[i].transform.position.y - m_Options[i].rect.height / 2f;
 
             m_ButtonCollider[i] = new Vector4(right, left, top, bottom);
         }
