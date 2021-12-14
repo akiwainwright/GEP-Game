@@ -22,7 +22,7 @@ public class AnyButtonFlashing : MonoBehaviour
         m_PressAnyButton.SetActive(true);
         m_MainScreenOptions.SetActive(false);
 
-        m_Background = m_PressAnyButton.GetComponent<CanvasGroup>();
+        m_Background = m_PressAnyButton.transform.GetChild(0).GetComponent<CanvasGroup>();
 
         //Setting up fade animation
         m_FadeSequence = DOTween.Sequence();
