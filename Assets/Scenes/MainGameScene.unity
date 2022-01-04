@@ -3725,7 +3725,7 @@ MonoBehaviour:
   m_GameManager: {fileID: 1304998477}
   m_Camera: {fileID: 1866068257}
   staminaLossValue: 45
-  staminaRecoverValue: 75
+  staminaRecoverValue: 60
 --- !u!65 &1241185912
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3772,9 +3772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b185af79aaea954cb52aef352533cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 250
-  power: 5
-  stamina: 5
+  speed: 150
+  power: 150
+  stamina: 150
 --- !u!1 &1304041706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3971,7 +3971,9 @@ MonoBehaviour:
   m_GameUI: {fileID: 1573007188}
   m_GameBGM: {fileID: 2119465511}
   m_PreGameBGM: {fileID: 1731116624}
+  m_Click: {fileID: 1488604678}
   m_TimeLeft: {fileID: 1546859267}
+  m_EnemiesRemaining: {fileID: 1636752696}
   timeRemainingMins: 0
   timeRemainingSeconds: 0
   gameStart: 0
@@ -4001,6 +4003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 524234ddebd43f44c943d921f8807740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Click: {fileID: 1488604678}
   m_Player: {fileID: 1241185910}
   m_PreMatchVisuals: {fileID: 337241629}
   m_PreMatchCam: {fileID: 1044194778}
@@ -4523,7 +4526,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1546859266
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4963,7 +4966,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1636752695
 RectTransform:
   m_ObjectHideFlags: 0
