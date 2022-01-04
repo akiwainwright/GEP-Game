@@ -149,7 +149,7 @@ AudioSource:
   m_GameObject: {fileID: 13892746}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 9163587574019842359, guid: 5d13c2d40b89f5743965d192498348aa, type: 2}
+  OutputAudioMixerGroup: {fileID: 6278238127270001817, guid: 5d13c2d40b89f5743965d192498348aa, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4d36e001ee30b0a48bf74d9c2cc606ee, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -493,8 +493,8 @@ AudioSource:
   m_GameObject: {fileID: 711058272}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -7302886514233184098, guid: 5d13c2d40b89f5743965d192498348aa, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 5c39548b71b9a51419d5d87de62dea28, type: 3}
+  OutputAudioMixerGroup: {fileID: 5217819762792764262, guid: 5d13c2d40b89f5743965d192498348aa, type: 2}
+  m_audioClip: {fileID: 8300000, guid: bbfe0ad0ee47a984a826669392a397c2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1174,6 +1174,7 @@ GameObject:
   - component: {fileID: 1452901972}
   - component: {fileID: 1452901976}
   - component: {fileID: 1452901978}
+  - component: {fileID: 1452901977}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1280,6 +1281,19 @@ MonoBehaviour:
   m_MainScreenOptions: {fileID: 1439395663}
   m_ClickSFX: {fileID: 13892747}
   m_FadeSpeed: 1.5
+--- !u!114 &1452901977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1452901971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba99ec38ffe5b1d44ad7b26b75706fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GameSounds: {fileID: 24100000, guid: 5d13c2d40b89f5743965d192498348aa, type: 2}
 --- !u!114 &1452901978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1723,10 +1737,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 4b2ad5cfef341d547808115858daf701, type: 3}
-    m_FontSize: 193
+    m_FontSize: 185
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 1
     m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 1
@@ -1734,7 +1748,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Title
+  m_Text: 'Hokaku
 
 '
 --- !u!222 &1824071534
