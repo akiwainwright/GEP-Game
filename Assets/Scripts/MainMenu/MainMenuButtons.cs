@@ -6,6 +6,7 @@ using UnityEngine.Audio;
 
 public class MainMenuButtons : MonoBehaviour
 {
+    //static to preserve across game as loading screen is on a different scene
     public static int SceneToLoad;
 
     [SerializeField] private AudioSource m_SelectionSFX;
@@ -25,8 +26,8 @@ public class MainMenuButtons : MonoBehaviour
 
     public void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
-        //QuitGame();
+        //UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 
 

@@ -23,10 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     private bool m_CanSprint;
 
-    
-
-    
-
     private void Start()
     {
         m_PlayerStats = GetComponent<CharacterStats>();
@@ -46,62 +42,75 @@ public class PlayerMovement : MonoBehaviour
     {
         if(m_CurrentStamina < 0)
         {
-            m_CurrentStamina = 10;
+            m_CurrentStamina = 0;
             m_CanSprint = false;
         }
 
-        if (!m_GameManager.GetComponent<GameManager>().paused)
+        //Making sure game isn't paused before player tries to move
+        if (!m_GameManager.GetComponent<GameManager>().paused && (m_GameManager.GetComponent<GameManager>().playing || m_GameManager.GetComponent<GameManager>().preMatch))
         {
-            m_Animator.speed = 1;
-
-            if(Input.GetKey(KeyCode.LeftShift) &&  m_CanSprint)
+            if (!m_Animator.GetBool("Attack"))
             {
-                if(m_CanSprint)
-                m_SpeedMultiplier = 1.4f;
-                m_CurrentStamina -= (staminaLossValue * Time.deltaTime);
+                m_Animator.speed = 1;
 
-                m_Animator.SetBool("Sprint", true);
-            }
-            else
-            {
-                m_SpeedMultiplier = 1f;
-                m_Animator.SetBool("Sprint", false);
-                m_CurrentStamina += staminaRecoverValue * Time.deltaTime;
-
-                if(m_CurrentStamina > m_MaxStamina)
+                #region Sprinting
+                if (Input.GetKey(KeyCode.LeftShift) && m_CanSprint)
                 {
-                    m_CurrentStamina = m_MaxStamina;
+                    //Setting up sprint animation, speed and reducing stamina while sprinting
+                    m_Animator.SetBool("Sprint", true);
+
+                    if (m_Animator.GetBool("Sprint") && m_Animator.GetBool("Moving"))
+                    {
+                        m_SpeedMultiplier = 1.4f;
+                        m_CurrentStamina -= (staminaLossValue * Time.deltaTime);
+                    }
+                }
+                else
+                {
+                    m_SpeedMultiplier = 1f;
+                    m_Animator.SetBool("Sprint", false);
+                    m_CurrentStamina += staminaRecoverValue * Time.deltaTime;
+
+                    if (m_CurrentStamina > m_MaxStamina)
+                    {
+                        m_CurrentStamina = m_MaxStamina;
+                    }
+
+                    //Making player wait till there stamina recovers a bit before allowing them to sprint again
+                    if (m_CurrentStamina > 30f && !Input.GetKey(KeyCode.LeftShift))
+                    {
+                        m_CanSprint = true;
+                    }
+                }
+                #endregion
+
+                #region Basic Player Movement
+                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0 && !m_Animator.GetBool("Attack"))
+                {
+                    Vector3 horizontalDir = m_Camera.right * Input.GetAxis("Horizontal");
+
+                    Vector3 verticalDir = Vector3.ProjectOnPlane(m_Camera.forward, Vector3.up) * Input.GetAxis("Vertical");
+
+                    moveDir = (horizontalDir + verticalDir).normalized;
+
+                    m_RB.velocity = moveDir * m_PlayerStats.speed * m_SpeedMultiplier * Time.deltaTime;
+                    m_Animator.SetBool("Moving", true);
+                }
+                else
+                {
+                    m_Animator.SetBool("Moving", false);
                 }
 
-                if (m_CurrentStamina > m_MaxStamina * 0.15f && Input.GetKeyUp(KeyCode.LeftShift))
+                if (moveDir != Vector3.zero)
                 {
-                    m_CanSprint = true;
+                    m_RB.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
                 }
-            }
-
-            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-            {
-                Vector3 horizontalDir = m_Camera.right * Input.GetAxis("Horizontal");
-
-                Vector3 verticalDir = Vector3.ProjectOnPlane(m_Camera.forward, Vector3.up) * Input.GetAxis("Vertical");
-
-                moveDir = (horizontalDir + verticalDir).normalized;
-
-                m_RB.velocity = moveDir * m_PlayerStats.speed * m_SpeedMultiplier * Time.deltaTime;
-                m_Animator.SetBool("Moving", true);
-            }
-            else
-            {
-                m_Animator.SetBool("Moving", false);
-            }
-
-            if (moveDir != Vector3.zero)
-            {
-                m_RB.rotation = Quaternion.LookRotation(moveDir, Vector3.up);
+                #endregion
             }
         }
         else
         {
+            //pausing player animation when game is paused
             m_Animator.speed = 0;
         }
     }

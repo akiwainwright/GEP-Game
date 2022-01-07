@@ -20,7 +20,6 @@ public class StaminaBar : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Stamina Left: " + m_PlayerScript.GetCurrentStamina());
         m_StaminaBar.value = m_PlayerScript.GetCurrentStamina() / m_PlayerScript.GetMaxStamina();
     }
 }

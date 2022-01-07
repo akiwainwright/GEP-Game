@@ -31,6 +31,7 @@ public class SettingStats : MonoBehaviour
     private void Start()
     {
         m_StatsScript = m_Player.GetComponent<CharacterStats>();
+        m_PreMatchUI.gameObject.SetActive(true);
         m_TotalPoints = 21;
 
         m_Speed = 0;
@@ -53,12 +54,15 @@ public class SettingStats : MonoBehaviour
         m_PowerValue.text = m_Power.ToString();
     }
 
+    #region Stat Buttons
     public void SetAndStart()
     {
+
+        //Setting player starts and starting the game
         m_Click.Play();
-        m_StatsScript.speed = 150 + (m_Speed * 10);
-        m_StatsScript.stamina = 150 + (m_Stamina * 10);
-        m_StatsScript.power = 150 + (m_Power * 10);
+        m_StatsScript.speed = 100 + (m_Speed * 10);
+        m_StatsScript.stamina = 150 + (m_Stamina * 15);
+        m_StatsScript.power = 70 + (m_Power * 20);
 
         m_PreMatchCam.gameObject.SetActive(false);
         m_PreMatchUI.gameObject.SetActive(false);
@@ -128,4 +132,5 @@ public class SettingStats : MonoBehaviour
             m_TotalPoints++;
         }
     }
+    #endregion
 }

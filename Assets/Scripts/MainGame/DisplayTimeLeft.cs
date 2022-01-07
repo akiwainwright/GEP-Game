@@ -14,9 +14,9 @@ public class DisplayTimeLeft : MonoBehaviour
     {
         m_ManagerScript = GetComponent<GameManager>();
 
-        if (m_ManagerScript.timeRemainingSeconds == 0)
+        if (m_ManagerScript.timeRemainingSeconds >= 0 && m_ManagerScript.timeRemainingSeconds <= 9)
         {
-            m_TimeRemaining.text = m_ManagerScript.timeRemainingMins.ToString() + ":" + m_ManagerScript.timeRemainingSeconds.ToString() + "0";
+            m_TimeRemaining.text = m_ManagerScript.timeRemainingMins.ToString() + ":0" + m_ManagerScript.timeRemainingSeconds.ToString();
         }
         else
         {
@@ -26,9 +26,9 @@ public class DisplayTimeLeft : MonoBehaviour
 
     private void Update()
     {
-        if (m_ManagerScript.timeRemainingSeconds == 0)
+        if (m_ManagerScript.timeRemainingSeconds >= 0 && m_ManagerScript.timeRemainingSeconds <= 9)
         {
-            m_TimeRemaining.text = m_ManagerScript.timeRemainingMins.ToString() + ":" + m_ManagerScript.timeRemainingSeconds.ToString() + "0";
+            m_TimeRemaining.text = m_ManagerScript.timeRemainingMins.ToString() + ":0" + m_ManagerScript.timeRemainingSeconds.ToString();
         }
         else
         {
